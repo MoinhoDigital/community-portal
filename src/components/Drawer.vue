@@ -33,7 +33,7 @@ export default {
         {
           title: "Internet",
           icon: "mdi-web",
-          route: "http://thisnode.info/portal"
+          route: "http://rede.com/portal"
         },
         {
           title: "Aplicativos locais",
