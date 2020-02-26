@@ -57,7 +57,10 @@ export default {
         sources: {
           "simple-tiles": {
             type: "raster",
-            tiles: ["http://127.0.0.1:3000/{z}/{x}/{y}.jpeg"],
+            tiles: [
+              `http://${process.env.VUE_APP_TILE_SERVER ||
+                "127.0.0.1:3000"}/{z}/{x}/{y}.jpeg`
+            ],
             tileSize: 256
           }
         },
