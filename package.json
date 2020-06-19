@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:web": "VUE_APP_WEB=true VUE_APP_TILE_SERVER=https://server.moinho.network vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

@@ -20,78 +20,59 @@
                 headline: mobile,
                 'display-2': !mobile
               }"
-            >
-              Povoado do Moinho
-            </h1>
-            <p class="subheading font-weight-regular">
-              Bem vindos ao Povoado do Moinho, seja um morador ou visitante
-            </p>
+            >Povoado do Moinho</h1>
+            <p class="subheading font-weight-regular">Bem vindos ao Povoado do Moinho</p>
+            <p class="font-weight-regular">Esse é o portal digital de entrada a nossa comunidade</p>
           </v-flex>
 
           <v-flex mb-5 xs12>
             <h2
+              @click="toggle"
               class="font-weight-bold mb-3"
               :class="{
                 'subtitle-1': mobile,
                 headline: !mobile
               }"
-            >
-              Mapa
-            </h2>
+            >Mapa</h2>
             <p class="subheading font-weight-regular">
               <a @click="toggle">Feche essa janela</a> para explorar o mapa do
-              Moinho. <br />Adicione um novo ponto
-              <a to="/places">clicando aqui</a>
+              Moinho.
+              <!-- <br />Adicione um novo ponto
+              <a to="/places">clicando aqui</a>-->
             </p>
           </v-flex>
+          <v-flex :v-if="isWeb" xs12 mb-5>
+            <h2
+              link
+              @click="toggle && changeRoute('/about')"
+              class="font-weight-bold mb-3"
+              :class="{
+                'subtitle-1': mobile,
+                headline: !mobile
+              }"
+            >Sobre</h2>
 
-          <v-flex xs12 mb-5>
+            <v-layout justify-center>
+              <p
+                class="subheading font-weight-regular"
+              >Saiba mais sobre na initiativa da rede comunitária</p>
+            </v-layout>
+          </v-flex>
+
+          <!-- <v-flex xs12 mb-5>
             <h2
               class="font-weight-bold mb-3"
               :class="{
                 'subtitle-1': mobile,
                 headline: !mobile
               }"
-            >
-              Internet
-            </h2>
-
-            <!-- <v-layout justify-center>
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-            </v-layout>-->
-          </v-flex>
-
-          <v-flex xs12 mb-5>
-            <h2
-              class="font-weight-bold mb-3"
-              :class="{
-                'subtitle-1': mobile,
-                headline: !mobile
-              }"
-            >
-              Aplicativos
-            </h2>
-
-            <!-- <v-layout justify-center>
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-            </v-layout>-->
-          </v-flex>
+            >Aplicativos</h2>
+            <v-layout justify-center>
+              <p
+                class="subheading font-weight-regular"
+              >Aplicativos feitos para a comunidade do Moinho</p>
+            </v-layout>
+          </v-flex>-->
         </v-layout>
       </v-card-text>
 
@@ -114,6 +95,17 @@ export default {
   computed: {
     mobile() {
       return this.$vuetify.breakpoint.xs;
+    },
+    isWeb() {
+      return process.env.VUE_APP_WEB ? true : false;
+    }
+  },
+  methods: {
+    changeRoute(route) {
+      const isExternal = route.includes("http://");
+      if (this.$vuetify.breakpoint.xs) this.$emit("toggle");
+      if (isExternal) window.open(route);
+      else this.$router.push(route);
     }
   }
 };
