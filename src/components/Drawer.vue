@@ -22,18 +22,13 @@ export default {
     drawer: Boolean,
     toggle: Function
   },
-  data: function() {
-    return {
-      routes: [
+  computed: {
+    routes: function() {
+      let routes = [
         {
           title: "Mapa",
           icon: "mdi-map",
           route: "/"
-        },
-        {
-          title: "Internet",
-          icon: "mdi-web",
-          route: "http://rede.com/portal"
         },
         {
           title: "Aplicativos locais",
@@ -50,10 +45,16 @@ export default {
           icon: "mdi-information",
           route: "/about"
         }
-      ]
-    };
-  },
-  computed: {
+      ];
+      if (!process.env.VUE_APP_WEB) {
+        routes.push({
+          title: "Internet",
+          icon: "mdi-web",
+          route: "http://rede.com/portal"
+        });
+      }
+      return routes;
+    },
     open: {
       get() {
         return this.drawer;
