@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-navigation-drawer v-model="open" app>
+    <v-navigation-drawer v-model="open" app :permanent="!$vuetify.breakpoint.xs">
       <v-list v-for="route in routes" :key="route.title" dense>
         <v-list-item link @click="changeRoute(route.route)">
           <v-list-item-action>
@@ -35,12 +35,13 @@ export default {
           icon: "mdi-apps",
           route: "/apps"
         },
-        // {
-        //   title: "Pontos",
-        //   icon: "mdi-map-marker",
-        //   route: "/places"
-        // },
         {
+          title: "Jornal",
+          icon: "mdi-book",
+          route: "/posts"
+        },
+        {
+          
           title: "Sobre",
           icon: "mdi-information",
           route: "/about"

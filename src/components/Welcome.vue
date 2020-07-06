@@ -12,7 +12,7 @@
           <!-- <v-flex xs12>
             <v-img :src="require('../assets/logo.svg')" class="my-3" contain height="200"></v-img>
           </v-flex>-->
-
+          <Logo />
           <v-flex mb-4>
             <h1
               class="mb-3 font-weight-bold"
@@ -85,6 +85,8 @@
 </template>
 
 <script>
+import Logo from '~/components/Logo.vue'
+
 export default {
   name: "Welcome",
 
@@ -107,6 +109,9 @@ export default {
       if (isExternal) window.open(route);
       else this.$router.push(route);
     }
-  }
+  },
+    components: {
+    Logo
+  },
 };
 </script>
