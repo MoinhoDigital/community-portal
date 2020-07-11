@@ -10,26 +10,26 @@ module.exports = {
   tileServer: process.env.SITE_DESCRIPTION,
   templates: {
     // Place: '/:nome',
-    // Post: '/:title'
-    // Tag: '/tag/:id'
+    Post: '/:title',
+    Tag: '/tag/:id'
   },
 
   plugins: [
-    // {
-    //   // Create posts from markdown files
-    //   use: '@gridsome/source-filesystem',
-    //   options: {
-    //     typeName: 'Post',
-    //     path: 'content/posts/*.md',
-    //     refs: {
-    //       // Creates a GraphQL collection from 'tags' in front-matter and adds a reference.
-    //       // tags: {
-    //       //   typeName: 'Tag',
-    //       //   create: true
-    //       // }
-    //     }
-    //   }
-    // },
+    {
+      // Create posts from markdown files
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Post',
+        path: 'content/posts/*.md',
+        refs: {
+          // Creates a GraphQL collection from 'tags' in front-matter and adds a reference.
+          tags: {
+            typeName: 'Tag',
+            create: true
+          }
+        }
+      }
+    },
     {
       use: '@gridsome/source-filesystem',
       options: {

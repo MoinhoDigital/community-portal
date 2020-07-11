@@ -35,11 +35,11 @@ export default {
           icon: "mdi-apps",
           route: "/apps"
         },
-        // {
-        //   title: "Jornal",
-        //   icon: "mdi-book",
-        //   route: "/posts"
-        // },
+        {
+          title: "Jornal",
+          icon: "mdi-book",
+          route: "/posts"
+        },
         {
           
           title: "Sobre",
