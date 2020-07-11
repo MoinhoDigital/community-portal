@@ -2,9 +2,9 @@
 title: A post with a cover image
 date: 2019-01-07T00:00:00.000Z
 published: true
-tags:
-  - Markdown
-  - Cover Image
+# tags:
+#   - Markdown
+#   - Cover Image
 cover_image: /images/uploads/alexandr-podvalny-220262-unsplash.jpg
 description: >-
   Markdown is intended to be as easy-to-read and easy-to-write as is feasible.

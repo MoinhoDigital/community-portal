@@ -1,6 +1,6 @@
 import Vuetify from 'vuetify/lib/framework'
-import VueMapbox from 'vue-mapbox'
-import Mapbox from 'mapbox-gl'
+// import VueMapbox from 'vue-mapbox'
+// import Mapbox from 'mapbox-gl'
 
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
@@ -25,7 +25,7 @@ export default function (Vue, { router, appOptions, head, isClient }) {
       iconfont: 'mdi'
     }
   } // opts includes, vuetify themes, icons, etc.
-  Vue.use(VueMapbox, { mapboxgl: Mapbox })
+  // Vue.use(VueMapbox, { mapboxgl: Mapbox })
   Vue.use(Vuetify)
   appOptions.vuetify = new Vuetify(opts)
   Vue.component('Layout', DefaultLayout)

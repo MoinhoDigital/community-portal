@@ -50,7 +50,7 @@ export default {
   computed: {
     welcome: {
       get: function() {
-        if (localStorage) {
+        if (process.isClient) {
           const isWelcomed = localStorage.getItem("welcome");
           if (isWelcomed === "true") return false;
         }
@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     toggleWelcome() {
-      if (localStorage) {
+      if (process.isClient) {
         localStorage.setItem("welcome", "true");
       }
       this.welcomed = !this.welcomed;

@@ -1,76 +1,117 @@
 <template>
   <div class="map">
-    <MglMap
-      :mapStyle="mapStyle"
-      :center="center"
-      :zoom="zoom"
-      :minZoom="15"
-      :maxZoom="19"
-      :maxBounds="maxBounds"
-      :attributionControl="false"
-    >
-      <MglNavigationControl position="top-right" />
-      <MglGeolocateControl position="top-right" :trackUserLocation="true" />
-      <MglMarker
-        v-for="marker in markers"
-        :key="marker.id"
-        :coordinates="marker.coords"
-        @mouseenter="handleEnter"
+    <ClientOnly>
+      <MglMap
+        :mapStyle="mapStyle"
+        :center="center"
+        :zoom="zoom"
+        :minZoom="15"
+        :maxZoom="19"
+        :maxBounds="maxBounds"
+        :attributionControl="false"
       >
-        <div slot="marker" class="marker">
-          <span>
-            <v-icon :color="marker.color" size="22">{{marker.icon}}</v-icon>
-          </span>
-        </div>
-        <MglPopup :offset="35" anchor="bottom">
-          <div class="caption">
-            <h3>{{ marker.nome }}</h3>
-            <g-image :alt="marker.nome" v-if="marker.imagem" :src="marker.imagem" />
-            <p>{{marker.descricao}}</p>
-            <v-icon
-              v-for="category in marker.allCat"
-              :color="category.color"
-              :key="category.id"
-              size="22"
-              class="pl-2"
-            >{{category.icon}}</v-icon>
+        <!-- <MglNavigationControl position="top-right" />
+        <MglGeolocateControl position="top-right" :trackUserLocation="true" />-->
+        <MglMarker
+          v-for="marker in markers"
+          :key="marker.id"
+          :coordinates="marker.coords"
+          @mouseenter="handleEnter"
+        >
+          <div slot="marker" class="marker">
+            <span>
+              <v-icon :color="marker.color" size="22">{{marker.icon}}</v-icon>
+            </span>
           </div>
-        </MglPopup>
-      </MglMarker>
-    </MglMap>
+          <MglPopup :offset="35" anchor="bottom">
+            <div class="caption">
+              <h3>{{ marker.nome }}</h3>
+              <g-image :alt="marker.nome" v-if="marker.imagem" :src="marker.imagem" />
+              <p>{{marker.descricao}}</p>
+              <v-icon
+                v-for="category in marker.allCat"
+                :color="category.color"
+                :key="category.id"
+                size="22"
+                class="pl-2"
+              >{{category.icon}}</v-icon>
+            </div>
+          </MglPopup>
+        </MglMarker>
+      </MglMap>
+    </ClientOnly>
   </div>
 </template>
 
+<static-query>
+query {
+  metadata {
+    tileServer
+  }
+}
+</static-query>
+
 <script>
-import Mapbox from "mapbox-gl";
-import {
-  MglMap,
-  MglMarker,
-  MglPopup,
-  MglNavigationControl,
-  MglGeolocateControl
-} from "vue-mapbox";
+// import Mapbox from "mapbox-gl";
+// import {
+//   MglMap,
+//   MglMarker,
+//   MglPopup,
+//   MglNavigationControl,
+//   MglGeolocateControl
+// } from "vue-mapbox";
 import placeHelper from '~/lib/place-category-helper'
 export default {
   components: {
-    MglMap,
-    MglMarker,
-    MglPopup,
-    MglNavigationControl,
-    MglGeolocateControl
+    MglMap: () => {
+      if (process.isClient) {
+        return import('vue-mapbox')
+        .then(m => m.MglMap)
+        .catch()
+      }
+    },
+    MglMarker: () => {
+      if (process.isClient) {
+        return import('vue-mapbox')
+        .then(m => m.MglMarker)
+        .catch()
+      }
+    },
+    MglPopup: () => {
+      if (process.isClient) {
+        return import('vue-mapbox')
+        .then(m => m.MglPopup)
+        .catch()
+      }
+    },
+    // MglMarker,
+    // MglPopup,
+    // MglNavigationControl,
+    // MglGeolocateControl
   },
   props: {
     places: { type: Array, default: [] }
   },
   data() {
     return {
-      mapStyle: {
-        version: 8,
+      map: null,
+      center: [-47.465106, -14.065287],
+      zoom: 15,
+      maxBounds: [
+        [-47.48, -14.07],
+        [-47.43, -14.04]
+      ]
+    };
+  },
+  computed: {
+    mapStyle () {
+      return {
+                version: 8,
         sources: {
           "simple-tiles": {
             type: "raster",
             tiles: [
-              `${process.env.TILE_SERVER ||
+              `${this.$static.metadata.tileServer ||
                 "http://127.0.0.1:3000"}/{z}/{x}/{y}.jpeg`
             ],
             tileSize: 256
@@ -85,16 +126,8 @@ export default {
             maxzoom: 19
           }
         ]
-      },
-      center: [-47.465106, -14.065287],
-      zoom: 15,
-      maxBounds: [
-        [-47.48, -14.07],
-        [-47.43, -14.04]
-      ]
-    };
-  },
-  computed: {
+      }
+    },
     markers () {
       const markers = this.places.map(i =>{
         const mainCategory = i.node.categorias[0].title
@@ -118,10 +151,14 @@ export default {
       return markers
     }
   },
-  created() {
-    // We need to set mapbox-gl library here in order to use it in template
-    this.mapbox = Mapbox;
+  mounted() {
+    window.mapboxgl = require('mapbox-gl');
+    const map = (this.map = new window.mapboxgl.Map(this.mapStyle));
   },
+  // created() {
+  //   // We need to set mapbox-gl library here in order to use it in template
+  //   this.mapbox = Mapbox;
+  // },
   methods: {
     handleEnter({ map, marker }) {
       map.easeTo({ center: marker._lngLat, zoom: 18, offset: [0, 300] });
