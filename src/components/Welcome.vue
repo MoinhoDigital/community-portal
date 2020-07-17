@@ -41,7 +41,7 @@
               <a to="/places">clicando aqui</a>-->
             </p>
           </v-flex>
-          <v-flex :v-if="isWeb" xs12 mb-5>
+          <v-flex :v-show="isWeb" xs12 mb-5>
             <h2
               link
               @click="toggle && changeRoute('/about')"

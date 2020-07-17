@@ -1,6 +1,10 @@
 <template>
   <v-container>
-    <v-navigation-drawer v-model="open" app :permanent="!$vuetify.breakpoint.xs">
+    <v-app-bar app color="indigo" dark>
+      <v-app-bar-nav-icon v-show="mobile" @click.stop="toggleDrawer" />
+      <v-toolbar-title>{{this.$static.metadata.siteName}}</v-toolbar-title>
+    </v-app-bar>
+    <v-navigation-drawer :temporary="mobile" v-model="drawer" app :permanent="!mobile">
       <v-list v-for="route in routes" :key="route.title" dense>
         <v-list-item link @click="changeRoute(route.route)">
           <v-list-item-action>
@@ -14,14 +18,19 @@
     </v-navigation-drawer>
   </v-container>
 </template>
-
+<static-query>
+query {
+  metadata {
+    siteName
+  }
+}
+</static-query>
 <script>
 export default {
   name: "Drawer",
-  props: {
-    drawer: Boolean,
-    toggle: Function
-  },
+  data: () => ({
+    drawer: null
+  }),
   computed: {
     routes: function() {
       let routes = [
@@ -56,19 +65,17 @@ export default {
       }
       return routes;
     },
-    open: {
-      get() {
-        return this.drawer;
-      },
-      set(n) {
-        return n;
-      }
-    }
+    mobile () {
+      return this.$vuetify.breakpoint.xs
+    },
   },
   methods: {
+    toggleDrawer () {
+      this.drawer = !this.drawer
+    },
     changeRoute(route) {
       const isExternal = route.includes("http://");
-      if (this.$vuetify.breakpoint.xs) this.$emit("toggle");
+      if (this.mobile) this.toggleDrawer();
       if (isExternal) window.open(route);
       else this.$router.push(route);
     }

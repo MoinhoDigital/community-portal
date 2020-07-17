@@ -26,7 +26,7 @@
           <MglPopup :offset="35" anchor="bottom">
             <div class="caption">
               <h3>{{ marker.nome }}</h3>
-              <g-image :alt="marker.nome" v-if="marker.imagem" :src="marker.imagem" />
+              <g-image :alt="marker.nome" v-show="marker.imagem" :src="marker.imagem" />
               <p>{{marker.descricao}}</p>
               <v-icon
                 v-for="category in marker.allCat"
@@ -52,14 +52,6 @@ query {
 </static-query>
 
 <script>
-// import Mapbox from "mapbox-gl";
-// import {
-//   MglMap,
-//   MglMarker,
-//   MglPopup,
-//   MglNavigationControl,
-//   MglGeolocateControl
-// } from "vue-mapbox";
 import placeHelper from '~/lib/place-category-helper'
 export default {
   components: {
@@ -83,11 +75,7 @@ export default {
         .then(m => m.MglPopup)
         .catch()
       }
-    },
-    // MglMarker,
-    // MglPopup,
-    // MglNavigationControl,
-    // MglGeolocateControl
+    }
   },
   props: {
     places: { type: Array, default: [] }
@@ -106,7 +94,7 @@ export default {
   computed: {
     mapStyle () {
       return {
-                version: 8,
+        version: 8,
         sources: {
           "simple-tiles": {
             type: "raster",
@@ -155,10 +143,6 @@ export default {
     window.mapboxgl = require('mapbox-gl');
     const map = (this.map = new window.mapboxgl.Map(this.mapStyle));
   },
-  // created() {
-  //   // We need to set mapbox-gl library here in order to use it in template
-  //   this.mapbox = Mapbox;
-  // },
   methods: {
     handleEnter({ map, marker }) {
       map.easeTo({ center: marker._lngLat, zoom: 18, offset: [0, 300] });

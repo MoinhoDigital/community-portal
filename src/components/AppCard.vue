@@ -15,10 +15,8 @@
     </v-card-text>
 
     <v-card-actions>
-      <a :href="data.link" target="_blank">
-        <v-btn color="orange" text>Ver</v-btn>
-      </a>
-      <v-btn color="orange" text>Compartilhar</v-btn>
+      <v-btn :href="data.link" link target="_blank" color="orange" text>Ver</v-btn>
+      <!-- <v-btn color="orange" text>Compartilhar</v-btn> -->
     </v-card-actions>
   </v-card>
 </template>

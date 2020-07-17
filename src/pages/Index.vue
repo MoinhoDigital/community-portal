@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Welcome :toggle="toggleWelcome" :open="welcome" />
-    <CommunityMap class="map" v-if="$page.places" :places="$page.places.edges" />
+    <CommunityMap class="map" v-show="$page.places" :places="$page.places.edges" />
   </Layout>
 </template>
 
@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      position: null,
+      // position: null,
       welcomed: true
     };
   },
@@ -58,13 +58,13 @@ export default {
       }
     }
   },
-  mounted() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.position = position.coords;
-      });
-    }
-  },
+  // mounted() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(position => {
+  //       this.position = position.coords;
+  //     });
+  //   }
+  // },
   methods: {
     toggleWelcome() {
       if (process.isClient) {

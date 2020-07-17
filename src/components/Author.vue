@@ -1,6 +1,6 @@
 <template>
   <div class="author">
-    <h1 v-if="showTitle" class="author__site-title">{{ $static.metadata.siteName }}</h1>
+    <h1 v-show="showTitle" class="author__site-title">{{ $static.metadata.siteName }}</h1>
 
     <p class="author__intro">
       <!-- A simple, hackable & minimalistic starter for Gridsome that uses Netlify CMS for content. -->

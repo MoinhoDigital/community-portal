@@ -4,7 +4,6 @@ data: 2019-01-07T00:00:00.000Z
 publicado: true
 categorias:
   - water
-  - wifi
 imagem: /images/uploads/alexandr-podvalny-220262-unsplash.jpg
 coords:
   - "-47.469955"

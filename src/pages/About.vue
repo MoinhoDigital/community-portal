@@ -2,7 +2,7 @@
   <Layout>
     <div class="about">
       <h1>Sobre</h1>
-      <div v-if="$page.about.content" v-html="$page.about.content" />
+      <div v-show="$page.about.content" v-html="$page.about.content" />
       <v-footer>
         <span>
           Criado com ❤ por

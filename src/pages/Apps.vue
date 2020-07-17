@@ -1,7 +1,6 @@
 <template>
   <Layout>
-    <h1>Apps</h1>
-    <AppList v-if="$page.apps" :apps="$page.apps.edges" />
+    <AppList v-show="$page.apps" :apps="$page.apps.edges" />
   </Layout>
 </template>
 

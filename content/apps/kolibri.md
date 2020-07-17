@@ -3,9 +3,9 @@ nome: Kolibri
 data: 2019-01-07T00:00:00.000Z
 publicado: true
 categorias:
-  - educacao
+  - educação
 imagem: /images/apps/kolibri.jpg
-link: http://kolibri.thisnode.info
+link: http://cursos.moinho.com
 descricao: >-
   Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
   Readability, however, is emphasized above all else. A Markdown-formatted
@@ -13,12 +13,8 @@ descricao: >-
   been marked up with tags or formatting instructions.
 ---
 
-Readability, however, is emphasized above all else. A Markdown-formatted
-document should be publishable as-is, as plain text, without looking
-like it's been marked up with tags or formatting instructions. 
+Kolibri é uma plataforma de cursos online que disponibiliza uma tecnologia educacional de alta qualidade em comunidades.
 
-While Markdown's syntax has been influenced by several existing text-to-HTML filters -- including [Setext](http://docutils.sourceforge.net/mirror/setext.html), [atx](http://www.aaronsw.com/2002/atx/), [Textile](http://textism.com/tools/textile/), [reStructuredText](http://docutils.sourceforge.net/rst.html),
-[Grutatext](http://www.triptico.com/software/grutatxt.html), and [EtText](http://ettext.taint.org/doc/) -- the single biggest source of
-inspiration for Markdown's syntax is the format of plain text email.
+Com essa plataforma você pode acompanhar o crescimento educacional de indivíduos e grupos de alunos com precisão e facilidade, mesmo em contextos educacionais informais. O Kolibri vem com ferramentas como um painel de treinamento, criação de exames, exercícios, atribuição de conteúdo para instruções diferenciadas e uma ferramenta de recomendação que exibe as próximas etapas úteis e relevantes com base no histórico, no progresso e nas metas de um aluno.
 
 
