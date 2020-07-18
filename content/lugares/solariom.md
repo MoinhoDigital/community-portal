@@ -3,24 +3,17 @@ nome: Parque Solariom
 data: 2019-01-07T00:00:00.000Z
 publicado: true
 categorias:
-  - water
-imagem: /images/uploads/alexandr-podvalny-220262-unsplash.jpg
+  - rio
+imagem: /images/uploads/cachoeira-dos-arcanjos.jpg
 coords:
   - "-47.469955"
   - "-14.056951"
 descricao: >-
-  Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
-  Readability, however, is emphasized above all else. A Markdown-formatted
-  document should be publishable as-is, as plain text, without looking like it's
-  been marked up with tags or formatting instructions.
+  No Parque Solarion estão abrigadas duas maravilhas naturais: a cachoeira Anjos e a Arcanjos.
+  Chegando no Parque, você encontra um estacionamento e a recepção onde é cobrada uma taxa de R$15,00 por pessoa para entrada. 
+  A distância da recepção do Parque até a cachoeira é de 5km ida e volta.
+  
 ---
 
-Readability, however, is emphasized above all else. A Markdown-formatted
-document should be publishable as-is, as plain text, without looking
-like it's been marked up with tags or formatting instructions. 
-
-While Markdown's syntax has been influenced by several existing text-to-HTML filters -- including [Setext](http://docutils.sourceforge.net/mirror/setext.html), [atx](http://www.aaronsw.com/2002/atx/), [Textile](http://textism.com/tools/textile/), [reStructuredText](http://docutils.sourceforge.net/rst.html),
-[Grutatext](http://www.triptico.com/software/grutatxt.html), and [EtText](http://ettext.taint.org/doc/) -- the single biggest source of
-inspiration for Markdown's syntax is the format of plain text email.
-
+Mais...
 

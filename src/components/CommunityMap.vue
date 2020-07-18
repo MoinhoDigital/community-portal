@@ -119,7 +119,9 @@ export default {
     markers () {
       const markers = this.places.map(i =>{
         const mainCategory = i.node.categorias[0].title
+        console.log(mainCategory)
         const style = placeHelper(mainCategory)
+        console.log(style)
         const allCat = i.node.categorias.map(c => {
           return {
             ...placeHelper(c.title),

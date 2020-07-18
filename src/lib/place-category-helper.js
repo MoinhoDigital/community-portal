@@ -1,16 +1,21 @@
 export default type => {
   switch (type) {
-    case 'food':
+    case 'artesanal':
+      return {
+        icon: 'mdi-hand-heart',
+        color: '#D81159'
+      }
+    case 'comida':
       return {
         icon: 'mdi-food',
         color: '#D81159'
       }
-    case 'sleep':
+    case 'cama':
       return {
         icon: 'mdi-sleep',
         color: '#FFBC42'
       }
-    case 'water':
+    case 'rio':
       return {
         icon: 'mdi-waves',
         color: '#218380'

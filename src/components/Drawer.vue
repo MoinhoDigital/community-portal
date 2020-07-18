@@ -21,6 +21,7 @@
 <static-query>
 query {
   metadata {
+    notLocal
     siteName
   }
 }
@@ -56,7 +57,7 @@ export default {
           route: "/about"
         }
       ];
-      if (!process.env.VUE_APP_WEB) {
+      if (!this.$static.metadata.notLocal) {
         routes.push({
           title: "Internet",
           icon: "mdi-web",

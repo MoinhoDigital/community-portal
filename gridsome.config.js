@@ -7,7 +7,7 @@
 module.exports = {
   siteName: process.env.SITE_NAME,
   siteDescription: process.env.SITE_DESCRIPTION,
-  tileServer: process.env.SITE_DESCRIPTION,
+  tileServer: process.env.SITE_DESCRIPTION || `http://localhost:3000`,
   templates: {
     // Place: '/:nome',
     Post: '/:title',
