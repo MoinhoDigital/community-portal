@@ -4,9 +4,9 @@
       <MglMap
         :mapStyle="mapStyle"
         :center="center"
-        :zoom="zoom"
-        :minZoom="15"
-        :maxZoom="19"
+        :zoom="$static.metadata.minZoom || 15"
+        :minZoom="$static.metadata.minZoom || 15"
+        :maxZoom="$static.metadata.maxzoom || 19"
         :maxBounds="maxBounds"
         :attributionControl="false"
       >
@@ -44,11 +44,16 @@
 </template>
 
 <static-query>
-query {
-  metadata {
-    tileServer
+  query {
+    metadata {
+      tileServer
+      maxZoom
+      minZoom
+      maxCoords
+      minCoords
+      mapCenter
+    }
   }
-}
 </static-query>
 
 <script>
@@ -83,15 +88,17 @@ export default {
   data() {
     return {
       map: null,
-      center: [-47.465106, -14.065287],
-      zoom: 15,
-      maxBounds: [
-        [-47.48, -14.07],
-        [-47.43, -14.04]
-      ]
+      defaultCoord: [-47.46, -14.06]
     };
   },
   computed: {
+    center () {
+      return this.$static.metadata.mapCenter || defaultCoord
+    },
+    maxBounds () {
+      const maxBound = [this.$static.metadata.minCoords || defaultCoord, this.$static.metadata.maxCoords || defaultCoord]
+      return maxBound
+    },
     mapStyle () {
       return {
         version: 8,
@@ -110,8 +117,8 @@ export default {
             id: "simple-tiles",
             type: "raster",
             source: "simple-tiles",
-            minzoom: 15,
-            maxzoom: 19
+            minzoom: this.$static.metadata.minZoom || 15,
+            maxzoom: this.$static.metadata.maxZoom || 19
           }
         ]
       }
@@ -119,9 +126,7 @@ export default {
     markers () {
       const markers = this.places.map(i =>{
         const mainCategory = i.node.categorias[0].title
-        console.log(mainCategory)
         const style = placeHelper(mainCategory)
-        console.log(style)
         const allCat = i.node.categorias.map(c => {
           return {
             ...placeHelper(c.title),
@@ -141,13 +146,13 @@ export default {
       return markers
     }
   },
-  mounted() {
+  mounted () {
     window.mapboxgl = require('mapbox-gl');
-    const map = (this.map = new window.mapboxgl.Map(this.mapStyle));
+    this.map = new window.mapboxgl.Map(this.mapStyle);
   },
   methods: {
     handleEnter({ map, marker }) {
-      map.easeTo({ center: marker._lngLat, zoom: 18, offset: [0, 300] });
+      map.easeTo({ center: marker._lngLat, zoom: this.$static.metadata.maxZoom, offset: [0, 300] });
     }
   }
 };
