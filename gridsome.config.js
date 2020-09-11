@@ -11,10 +11,24 @@ module.exports = {
   templates: {
     // Place: '/:nome',
     Post: '/:title',
-    Tag: '/tag/:id'
+    Tag: '/tag/:id',
+    Produto: '/produto/:id'
   },
 
   plugins: [
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Produto',
+        path: 'conteudo/produto/*.md',
+        refs: {
+          tags: {
+            typeName: 'Tag',
+            create: true
+          }
+        }
+      }
+    },
     {
       // Create posts from markdown files
       use: '@gridsome/source-filesystem',
