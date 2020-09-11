@@ -20,7 +20,7 @@ module.exports = {
       use: '@gridsome/source-filesystem',
       options: {
         typeName: 'Post',
-        path: 'content/posts/*.md',
+        path: 'conteudo/jornal/*.md',
         refs: {
           // Creates a GraphQL collection from 'tags' in front-matter and adds a reference.
           tags: {
@@ -33,8 +33,8 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        typeName: 'Place',
-        path: 'content/lugares/*.md',
+        typeName: 'Lugar',
+        path: 'conteudo/lugares/*.md',
         refs: {
           categorias: {
             typeName: 'Categoria',
@@ -47,7 +47,7 @@ module.exports = {
       use: '@gridsome/source-filesystem',
       options: {
         typeName: 'App',
-        path: 'content/apps/*.md',
+        path: 'conteudo/apps/*.md',
         refs: {
           categorias: {
             typeName: 'Categoria',
@@ -59,8 +59,8 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        typeName: 'About',
-        path: 'content/sobre.md'
+        typeName: 'Sobre',
+        path: 'conteudo/sobre.md'
       }
     }
   ],

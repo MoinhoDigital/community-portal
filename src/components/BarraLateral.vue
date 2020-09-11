@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-app-bar app color="indigo" dark>
-      <v-app-bar-nav-icon v-show="mobile" @click.stop="toggleDrawer" />
+      <v-app-bar-nav-icon v-show="mobile" @click.stop="toggleBarraLateral" />
       <v-toolbar-title>{{this.$static.metadata.siteName}}</v-toolbar-title>
     </v-app-bar>
     <v-navigation-drawer :temporary="mobile" v-model="drawer" app :permanent="!mobile">
@@ -28,7 +28,7 @@ query {
 </static-query>
 <script>
 export default {
-  name: "Drawer",
+  name: "BarraLateral",
   data: () => ({
     drawer: null
   }),
@@ -48,13 +48,19 @@ export default {
         {
           title: "Jornal",
           icon: "mdi-book",
-          route: "/posts"
+          route: "/jornal"
         },
         {
           
           title: "Sobre",
           icon: "mdi-information",
-          route: "/about"
+          route: "/sobre"
+        },
+        {
+          
+          title: "Catálogo",
+          icon: "mdi-book",
+          route: "/catalogo"
         }
       ];
       if (!this.$static.metadata.notLocal) {
@@ -71,12 +77,12 @@ export default {
     },
   },
   methods: {
-    toggleDrawer () {
+    toggleBarraLateral () {
       this.drawer = !this.drawer
     },
     changeRoute(route) {
       const isExternal = route.includes("http://");
-      if (this.mobile) this.toggleDrawer();
+      if (this.mobile) this.toggleBarraLateral();
       if (isExternal) window.open(route);
       else this.$router.push(route);
     }

@@ -1,13 +1,13 @@
 <template>
   <Layout>
     <Welcome :toggle="toggleWelcome" :open="welcome" />
-    <CommunityMap class="map" v-show="$page.places" :places="$page.places.edges" />
+    <CommunityMap class="map" v-show="$page.lugares" :places="$page.lugares.edges" />
   </Layout>
 </template>
 
 <page-query>
 query {
-  places: allPlace(filter: { publicado: { eq: true }}) {
+  lugares: allLugar(filter: { publicado: { eq: true }}) {
     edges {
       node {
         id

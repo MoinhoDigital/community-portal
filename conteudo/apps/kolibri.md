@@ -5,7 +5,7 @@ publicado: true
 categorias:
   - educação
 imagem: /images/apps/kolibri.jpg
-link: http://cursos.moinho.com
+link: http://10.147.249.54:8080 
 descricao: >-
   Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
   Readability, however, is emphasized above all else. A Markdown-formatted

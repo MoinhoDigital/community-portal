@@ -38,13 +38,13 @@
               <a @click="toggle">Feche essa janela</a> para explorar o mapa do
               Moinho.
               <!-- <br />Adicione um novo ponto
-              <a to="/places">clicando aqui</a>-->
+              <a to="/lugares">clicando aqui</a>-->
             </p>
           </v-flex>
           <v-flex :v-show="isWeb" xs12 mb-5>
             <h2
               link
-              @click="toggle && changeRoute('/about')"
+              @click="toggle && changeRoute('/sobre')"
               class="font-weight-bold mb-3"
               :class="{
                 'subtitle-1': mobile,

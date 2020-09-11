@@ -2,7 +2,7 @@
   <Layout>
     <div class="about">
       <h1>Sobre</h1>
-      <div v-show="$page.about.content" v-html="$page.about.content" />
+      <div v-show="$page.sobre.content" v-html="$page.sobre.content" />
       <v-footer>
         <span>
           Criado com ❤ por
@@ -15,7 +15,7 @@
 
 <page-query>
 query {
-  about(path: "/content/sobre/") {
+  sobre(path: "/conteudo/sobre/") {
     content
   }
 }
