@@ -1,9 +1,9 @@
 ---
 nome: Moinho Flix
-data: 2019-01-07T00:00:00.000Z
+data: 2020-01-07T00:00:00.000Z
 publicado: true
 categorias:
-  - entertenimento
+  - entretenimento
 imagem: /images/apps/flix.jpg
 link: http://flix.moinho.com
 descricao: >-

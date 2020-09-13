@@ -55,7 +55,7 @@
             <v-layout justify-center>
               <p
                 class="subheading font-weight-regular"
-              >Saiba mais sobre na initiativa da rede comunitária</p>
+              >Saiba mais sobre na iniciativa da rede comunitária</p>
             </v-layout>
           </v-flex>
 
