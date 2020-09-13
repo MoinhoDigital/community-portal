@@ -8,5 +8,4 @@ imagem: /images/apps/scuttlebutt.jpg
 link: http://translate.google.com/translate?js=n&sl=auto&tl=pt_br&u=https://scuttlebutt.nz/get-started/
 ---
 
-Baixe videos ou audios do Youtube e deixe salvo para assistir ou ouvir mais tarde, e também para compartilhar com outros usuários da rede.
-
+Scuttlebutt é uma rede social e funciona como outros aplicativos sociais que já usamos. A principal diferença é que ele funciona mesmo sem internet por nossa rede local.
