@@ -1,7 +1,7 @@
 ---
 title: Espisodio 2
 date: 2019-01-07T00:00:00.000Z
-published: true
+publicado: false
 tags:
   - Markdown
   - Cover Image

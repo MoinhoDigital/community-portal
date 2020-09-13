@@ -1,8 +1,7 @@
 <template>
-  <v-card class="mx-auto" max-width="400">
-    <v-img class="white--text align-end" height="200px" :src="data.imagem">
-      <v-card-title>{{data.nome}}</v-card-title>
-    </v-img>
+  <v-card class="mx-auto" max-width="400" height="550">
+    <v-list-item-title class="headline py-4">{{data.nome}}</v-list-item-title>
+    <v-img class="white--text align-end" height="200px" :src="data.imagem"></v-img>
 
     <v-card-subtitle
       v-for="category in data.categorias"

@@ -46,6 +46,12 @@ export default {
           route: "/apps"
         },
         {
+          
+          title: "Mercado Local",
+          icon: "mdi-shopping",
+          route: "/catalogo"
+        },
+        {
           title: "Jornal",
           icon: "mdi-book",
           route: "/jornal"
@@ -56,12 +62,7 @@ export default {
           icon: "mdi-information",
           route: "/sobre"
         },
-        {
-          
-          title: "Catálogo",
-          icon: "mdi-book",
-          route: "/catalogo"
-        }
+        
       ];
       if (!this.$static.metadata.notLocal) {
         routes.push({

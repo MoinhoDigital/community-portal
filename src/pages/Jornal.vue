@@ -1,18 +1,19 @@
 <template>
   <Layout>
     <!-- Author intro -->
-    <Author :show-title="true" />
+    <!-- <Author :show-title="true" /> -->
 
     <!-- List posts -->
-    <div class="posts">
+    <div class="posts" v-if="$page.posts.edges && $page.posts.edges.lenght > 0">
       <PostCard v-for="edge in $page.posts.edges" :key="edge.node.id" :post="edge.node" />
     </div>
+    <div v-else>Não existem entradas no jornal ainda.</div>
   </Layout>
 </template>
 
 <page-query>
 query {
-  posts: allPost(filter: { published: { eq: true }}) {
+  posts: allPost(filter: { publicado: { eq: true }}) {
     edges {
       node {
         id

@@ -7,12 +7,12 @@
         :produto="produto.node"
       />
     </div>
-    <div v-else>Não existem produtos</div>
+    <div v-else>Não existem produtos ainda.</div>
   </Layout>
 </template>
 <page-query>
 query {
-  produtos: allProduto {
+  produtos: allProduto(filter: { publicado: { eq: true }}) {
     edges {
       node {
         id
@@ -22,6 +22,7 @@ query {
         nome
         data
         imagem
+        publicado
       }
     }
   }

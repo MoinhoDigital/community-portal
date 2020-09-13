@@ -1,8 +1,12 @@
 <template>
   <div justify="start">
-    <h3>Aplicativos locais, que funcionam mesmo sem Internet.</h3>
+    <h3 class="text-center pb-8">Aplicativos locais, que funcionam mesmo sem Internet.</h3>
     <br />
-    <AppCard v-for="app in apps" :key="app.node.id" :data="app.node" />
+    <v-row>
+      <v-col v-for="app in apps" :key="app.node.id" cols="12" sm="3" md="4">
+        <AppCard :data="app.node" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -19,8 +23,8 @@ export default {
 }
 </script>
 <style scoped>
-  h3 {
-    padding: 5w;
-    margin: 0 auto;
-  }
+h3 {
+  padding: 5w;
+  margin: 0 auto;
+}
 </style>

@@ -1,11 +1,11 @@
 ---
-nome: Kolibri
+nome: Moinho Flix
 data: 2019-01-07T00:00:00.000Z
 publicado: true
 categorias:
-  - educação
-imagem: /images/apps/kolibri.jpg
-link: http://cursos.moinho.com
+  - entertenimento
+imagem: /images/apps/flix.jpg
+link: http://flix.moinho.com
 descricao: >-
   Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
   Readability, however, is emphasized above all else. A Markdown-formatted
@@ -13,5 +13,5 @@ descricao: >-
   been marked up with tags or formatting instructions.
 ---
 
-Kolibri é uma plataforma de cursos online que disponibiliza uma tecnologia educacional de alta qualidade em comunidades.
+Séries, documentários, filmes, além de várias opções musicais curados por nós da comunidade.
 
