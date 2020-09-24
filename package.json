@@ -15,6 +15,7 @@
     "@mdi/font": "^5.3.45",
     "gridsome": "^0.7.15",
     "mapbox-gl": "^1.11.0",
+    "node-fetch": "^2.6.1",
     "typeface-roboto": "^0.0.75",
     "vue-mapbox": "^0.4.1",
     "vuetify": "^2.3.3"
