@@ -2,9 +2,23 @@
   <v-container>
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon v-show="mobile" @click.stop="toggleBarraLateral" />
-      <v-toolbar-title>{{this.$static.metadata.siteName}}</v-toolbar-title>
+      <v-app-bar-nav-icon
+        class="ml-2"
+        v-if="isBack"
+        @click="$router.push('/catalogo')"
+      >
+        <v-icon>mdi-keyboard-backspace</v-icon>
+      </v-app-bar-nav-icon>
+      <v-toolbar-title v-else>{{
+        this.$static.metadata.siteName
+      }}</v-toolbar-title>
     </v-app-bar>
-    <v-navigation-drawer :temporary="mobile" v-model="drawer" app :permanent="!mobile">
+    <v-navigation-drawer
+      :temporary="mobile"
+      v-model="drawer"
+      app
+      :permanent="!mobile"
+    >
       <v-list v-for="route in routes" :key="route.title" dense>
         <v-list-item link @click="changeRoute(route.route)">
           <v-list-item-action>
@@ -30,7 +44,8 @@ query {
 export default {
   name: "BarraLateral",
   data: () => ({
-    drawer: null
+    drawer: null,
+    isBack: false
   }),
   computed: {
     routes: function() {
@@ -76,6 +91,11 @@ export default {
     mobile () {
       return this.$vuetify.breakpoint.xs
     },
+  },
+  mounted () {
+    if (this.$route.params.id) {
+      this.isBack = true
+    }
   },
   methods: {
     toggleBarraLateral () {
