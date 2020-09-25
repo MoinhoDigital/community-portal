@@ -1,45 +1,62 @@
 <template>
   <Layout>
     <div>
-      <v-row
-        v-if="$page && $page.people.edges && $page.people.edges.length > 0"
-      >
-        <v-col
-          cols="12"
-          :sm="4"
-          v-for="person in $page.people.edges"
-          :key="person.node.id"
+      <v-expansion-panels v-if="this.$page && this.$page.mercado">
+        <v-expansion-panel
+          v-for="category in Object.keys(perCategory).reverse()"
+          :key="category"
         >
-          <v-card class="mx-auto py-8 px-4" max-width="400" height="400">
-            <v-card-title>{{ person.node.name }}</v-card-title>
-            <v-card-subtitle>{{ person.node.category }}</v-card-subtitle>
-            <div style="height: 200px">
-              <v-chip
-                class="mx-2 my-2 text-capitalize"
-                v-for="product in person.node.products"
-                :key="product"
-                >{{ product }}</v-chip
+          <v-expansion-panel-header>
+            <template v-slot:default="{ open }">
+              <v-row no-gutters>
+                <v-col class="text-capitalize" cols="12">{{ category }}</v-col>
+              </v-row>
+            </template>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-row>
+              <v-col
+                cols="12"
+                :sm="4"
+                v-for="item in $page.mercado.edges.filter(
+                  (a) => a.node.category === category
+                )"
+                :key="item.node.id"
               >
-            </div>
+                <v-card class="mx-auto py-8 px-4" max-width="400" height="400">
+                  <v-card-title>{{
+                    item.node.name.split(" ")[0]
+                  }}</v-card-title>
+                  <!-- <v-card-subtitle>{{ item.node.category }}</v-card-subtitle> -->
+                  <div style="height: 200px">
+                    <v-chip
+                      class="mx-2 my-2 text-capitalize"
+                      v-for="product in item.node.products"
+                      :key="product"
+                      >{{ product }}</v-chip
+                    >
+                  </div>
 
-            <div v-if="person.node.contact">
-              <v-divider class="my-2"></v-divider>
-              <div>
-                <v-icon>mdi-phone</v-icon>
-                <span class="caption">{{ person.node.contact }}</span>
-              </div>
-            </div>
-          </v-card>
-          <!-- <ProdutoCatalogo :produto="produto.node" /> -->
-        </v-col>
-      </v-row>
-      <div v-else>Não existem produtos ainda.</div>
+                  <div v-if="item.node.contact">
+                    <v-divider class="my-2"></v-divider>
+                    <div>
+                      <v-icon>mdi-phone</v-icon>
+                      <span class="caption pl-4">{{ item.node.contact }}</span>
+                    </div>
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+      <!-- <ProdutoCatalogo :produto="produto.node" /> -->
     </div>
   </Layout>
 </template>
 <page-query>
 query {
-  people: allPeople {
+  mercado: allMercadoLocal {
     edges {
       node {
         id
@@ -73,6 +90,22 @@ import ProdutoCatalogo from '@/components/ProdutoCatalogo.vue'
       ProdutoCatalogo
     },
     computed: {
+      perCategory () {
+          return this.$page.mercado.edges.reduce((prev, curr) => {
+            let currArray = prev[curr.node.category]
+            if (currArray) {
+              currArray.push(curr.node)
+              const newData = Object.assign(prev, {
+                [curr.node.category]: currArray
+              })
+              return newData
+            } else {
+              return Object.assign(prev, {
+                [curr.node.category]: [curr.node]
+              })
+            }
+          }, {})
+      }
     }
   }
 </script>

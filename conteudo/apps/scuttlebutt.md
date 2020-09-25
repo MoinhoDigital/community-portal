@@ -3,7 +3,7 @@ nome: Scuttlebutt
 data: 2020-09-07T00:00:00.000Z
 publicado: true
 categorias:
-  - entretenimento
+  - rede social
 imagem: /images/apps/scuttlebutt.jpg
 link: http://translate.google.com/translate?js=n&sl=auto&tl=pt_br&u=https://scuttlebutt.nz/get-started/
 ---

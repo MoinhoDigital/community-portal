@@ -17,5 +17,11 @@
 export default {
     props: {
       produto: Object
-    }  }
+    }
+
+
+
+
+
+  }
   </script>

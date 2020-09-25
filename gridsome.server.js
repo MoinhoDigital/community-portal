@@ -57,13 +57,13 @@ module.exports = function (api) {
       const response = await fetch(docsP1)
       const data = await response.json()
       const entries = data.feed.entry
-      const people = parseData(entries)
+      const localMarket = parseData(entries)
       const collection = addCollection({
-        typeName: 'People'
+        typeName: 'MercadoLocal'
       })
 
-      for (const person of people) {
-        collection.addNode(person)
+      for (const entry of localMarket) {
+        collection.addNode(entry)
       }
     } catch (err) {
       console.error(err)
