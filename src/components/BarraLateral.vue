@@ -35,7 +35,7 @@
 <static-query>
 query {
   metadata {
-    notLocal
+    intranet
     siteName
   }
 }
@@ -56,11 +56,6 @@ export default {
           route: "/"
         },
         {
-          title: "Aplicativos locais",
-          icon: "mdi-apps",
-          route: "/apps"
-        },
-        {
           
           title: "Mercado Local",
           icon: "mdi-shopping",
@@ -79,8 +74,13 @@ export default {
         },
         
       ];
-      if (!this.$static.metadata.notLocal) {
-        routes.push({
+      if (this.$static.metadata.intranet == 'true') {
+        routes.splice(2 ,0, {
+          title: "Aplicativos locais",
+          icon: "mdi-apps",
+          route: "/apps"
+        });
+        routes.splice(3 ,0, {
           title: "Internet",
           icon: "mdi-web",
           route: "http://rede.com/portal"

@@ -46,7 +46,7 @@ module.exports = function (api) {
     const { addCollection, addMetadata } = actions
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
     addMetadata('tileServer', process.env.TILE_SERVER)
-    addMetadata('notLocal', process.env.NOT_LOCAL || false)
+    addMetadata('intranet', process.env.INTRANET || false)
     addMetadata('minZoom', parseInt(process.env.MAP_MIN_ZOOM) || 15)
     addMetadata('maxZoom', parseInt(process.env.MAP_MAX_ZOOM) || 19)
     addMetadata('maxCoords', stringToCoords(process.env.MAP_MAX_LONG_LAT))
