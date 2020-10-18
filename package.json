@@ -5,6 +5,8 @@
     "build": "gridsome build",
     "build:local": "TILE_SERVER=http://map-api.thisnode.info gridsome build",
     "dev": "gridsome develop",
+    "deploy": "npm run build && npm run scp",
+    "scp": "scp -r dist $(grep HOSTED_FOLDER .env | cut -d '=' -f2)",
     "explore": "gridsome explore"
   },
   "dependencies": {
