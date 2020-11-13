@@ -20,6 +20,7 @@
     "node-fetch": "^2.6.1",
     "typeface-roboto": "^0.0.75",
     "vue-mapbox": "^0.4.1",
+    "vue-pdf": "^4.2.0",
     "vuetify": "^2.3.3"
   },
   "devDependencies": {
