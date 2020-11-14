@@ -5,17 +5,28 @@
         <v-btn @click="lastPage">Voltar</v-btn>
         <v-btn @click="nextPage">Próximo</v-btn>
       </div>
+      <div v-if="!pdfLoaded" class="text-center pt-16">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+        <h3>Carregando arquivo de pdf</h3>
+        <v-icon size="100">mdi-file</v-icon>
+      </div>
       <pdf
         src="/docs/jornal_moinho_1.pdf"
         @num-pages="pageCount = $event"
         @page-loaded="currentPage = $event"
+        @loaded="pdfLoaded = true"
         :page="currentPage"
       ></pdf>
       <div class="controls d-flex justify-space-around pt-4 mx-auto">
         <v-btn @click="lastPage">Voltar</v-btn>
         <v-btn @click="nextPage">Próximo</v-btn>
       </div>
-      <div class="center">{{ currentPage }} / {{ pageCount }}</div>
+      <div v-if="pdfLoaded" class="text-center py-8">
+        {{ currentPage }} / {{ pageCount }}
+      </div>
       <br />
       <!-- <button @click="$refs.pdf.print()">Imprimir</button> -->
     </div>
@@ -78,7 +89,7 @@ export default {
   },
 	data() {
 		return {
-      // '~/assets/docs/Jornal do Moinho_1ª edição_finaldivulgação.pdf'
+      pdfLoaded: false,
 			currentPage: 1,
 			pageCount: 0,
 		}
