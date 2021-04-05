@@ -1,6 +1,10 @@
 <template>
   <Layout>
     <div class="pdf">
+      <div class="d-flex justify-space-around pb-12">
+        <v-btn :disabled="edition === 0" color="primary" @click="edition = 0">Primeira edição</v-btn>
+        <v-btn :disabled="edition === 1" color="primary" @click="edition = 1">Segunda edição</v-btn>
+      </div>
       <div class="controls d-flex justify-space-around pb-4 mx-auto">
         <v-btn @click="lastPage">Voltar</v-btn>
         <v-btn @click="nextPage">Próximo</v-btn>
@@ -14,7 +18,7 @@
         <v-icon size="100">mdi-file</v-icon>
       </div>
       <pdf
-        src="/docs/jornal_moinho_1.pdf"
+        :src="`/docs/${edititions[edition]}`"
         @num-pages="pageCount = $event"
         @page-loaded="currentPage = $event"
         @loaded="pdfLoaded = true"
@@ -89,6 +93,11 @@ export default {
   },
 	data() {
 		return {
+      edition: 0,
+      edititions: [
+        'jornal_moinho_1.pdf',
+        'jornal_moinho_2.pdf'
+      ],
       pdfLoaded: false,
 			currentPage: 1,
 			pageCount: 0,
