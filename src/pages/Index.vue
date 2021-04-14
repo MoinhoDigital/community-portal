@@ -3,7 +3,7 @@
     <!-- <div v-show="$page && $page.mercado">
       {{$page}}
     </div> -->
-    <Welcome :toggle="toggleWelcome" :open="welcome" />
+    <!-- <Welcome :toggle="toggleWelcome" :open="welcome" /> -->
     <!-- <CommunityMap class="map" v-show="$page.lugares" :places="$page.lugares.edges" /> -->
     <CommunityMap
       class="map"

@@ -24,7 +24,7 @@
           height="250"
           src="https://melhorespousadas.tur.br/uploads/pousadas-fotos/011/hostel-moinho-120131.jpg"
         ></v-img> -->
-        <div class="pt-12">
+        <div :class="isMobile ? 'pt-0 pb-2' : 'pt-12'">
           <v-list v-for="route in routes" :key="route.title" dense>
             <v-list-item
               :disabled="route.disabled"
@@ -68,6 +68,9 @@ export default {
     isBack: false
   }),
   computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.xs;
+    },
     routes: function() {
       const {
         isIntranet,

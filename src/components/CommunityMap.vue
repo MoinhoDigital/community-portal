@@ -136,10 +136,6 @@ export default {
       return this.$static.metadata.mapboxAccessToken || "";
     },
     mapStyle() {
-      console.log(
-        "this.$static.metadata.mapboxAccessToken",
-        this.$static.metadata.mapboxAccessToken
-      );
       if (this.$static.metadata.mapboxAccessToken)
         return this.$static.metadata.tileServer;
       return {
