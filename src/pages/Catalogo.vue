@@ -19,7 +19,7 @@
                 cols="12"
                 :sm="4"
                 v-for="item in $page.mercado.edges.filter(
-                  (a) => a.node.category === category
+                  a => a.node.category === category
                 )"
                 :key="item.node.id"
               >
@@ -84,28 +84,28 @@ query {
 }
 </page-query>
 <script>
-import ProdutoCatalogo from '@/components/ProdutoCatalogo.vue'
-  export default {
-    components: {
-      ProdutoCatalogo
-    },
-    computed: {
-      perCategory () {
-          return this.$page.mercado.edges.reduce((prev, curr) => {
-            let currArray = prev[curr.node.category]
-            if (currArray) {
-              currArray.push(curr.node)
-              const newData = Object.assign(prev, {
-                [curr.node.category]: currArray
-              })
-              return newData
-            } else {
-              return Object.assign(prev, {
-                [curr.node.category]: [curr.node]
-              })
-            }
-          }, {})
-      }
+import ProdutoCatalogo from "@/components/ProdutoCatalogo.vue";
+export default {
+  components: {
+    ProdutoCatalogo
+  },
+  computed: {
+    perCategory() {
+      return this.$page.mercado.edges.reduce((prev, curr) => {
+        let currArray = prev[curr.node.category];
+        if (currArray) {
+          currArray.push(curr.node);
+          const newData = Object.assign(prev, {
+            [curr.node.category]: currArray
+          });
+          return newData;
+        } else {
+          return Object.assign(prev, {
+            [curr.node.category]: [curr.node]
+          });
+        }
+      }, {});
     }
   }
+};
 </script>

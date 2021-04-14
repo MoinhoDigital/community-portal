@@ -1,9 +1,13 @@
 <template>
   <Layout>
     <div class="pdf">
-      <div class="d-flex justify-space-around pb-12">
-        <v-btn :disabled="edition === 0" color="primary" @click="edition = 0">Primeira edição</v-btn>
-        <v-btn :disabled="edition === 1" color="primary" @click="edition = 1">Segunda edição</v-btn>
+      <div class="d-md-flex justify-space-around pb-12 text-center">
+        <v-btn :disabled="edition === 0" color="primary" @click="edition = 0"
+          >Novembro 2020</v-btn
+        >
+        <v-btn :disabled="edition === 1" color="primary" @click="edition = 1"
+          >Dezembro 2020</v-btn
+        >
       </div>
       <div class="controls d-flex justify-space-around pb-4 mx-auto">
         <v-btn @click="lastPage">Voltar</v-btn>
@@ -17,13 +21,15 @@
         <h3>Carregando arquivo de pdf</h3>
         <v-icon size="100">mdi-file</v-icon>
       </div>
-      <pdf
-        :src="`/docs/${edititions[edition]}`"
-        @num-pages="pageCount = $event"
-        @page-loaded="currentPage = $event"
-        @loaded="pdfLoaded = true"
-        :page="currentPage"
-      ></pdf>
+      <a target="_blank" :href="`/docs/${edititions[edition]}`">
+        <pdf
+          :src="`/docs/${edititions[edition]}`"
+          @num-pages="pageCount = $event"
+          @page-loaded="currentPage = $event"
+          @loaded="pdfLoaded = true"
+          :page="currentPage"
+        ></pdf>
+      </a>
       <div class="controls d-flex justify-space-around pt-4 mx-auto">
         <v-btn @click="lastPage">Voltar</v-btn>
         <v-btn @click="nextPage">Próximo</v-btn>
@@ -32,7 +38,6 @@
         {{ currentPage }} / {{ pageCount }}
       </div>
       <br />
-      <!-- <button @click="$refs.pdf.print()">Imprimir</button> -->
     </div>
 
     <!-- Author intro -->
@@ -78,9 +83,9 @@ query {
 </page-query>
 
 <script>
-import Author from '~/components/Author.vue'
-import PostCard from '~/components/PostCard.vue'
-import pdf from 'vue-pdf'
+import Author from "~/components/Author.vue";
+import PostCard from "~/components/PostCard.vue";
+import pdf from "vue-pdf";
 
 export default {
   components: {
@@ -89,33 +94,30 @@ export default {
     pdf
   },
   metaInfo: {
-    title: 'Home'
+    title: "Home"
   },
-	data() {
-		return {
-      edition: 0,
-      edititions: [
-        'jornal_moinho_1.pdf',
-        'jornal_moinho_2.pdf'
-      ],
+  data() {
+    return {
+      edition: 1,
+      edititions: ["jornal_moinho_1.pdf", "jornal_moinho_2.pdf"],
       pdfLoaded: false,
-			currentPage: 1,
-			pageCount: 0,
-		}
+      currentPage: 1,
+      pageCount: 0
+    };
   },
   methods: {
-    nextPage () {
+    nextPage() {
       if (this.currentPage < this.pageCount) {
-        this.currentPage = this.currentPage + 1
+        this.currentPage = this.currentPage + 1;
       }
     },
-    lastPage () {
+    lastPage() {
       if (this.currentPage > 1) {
-        this.currentPage = this.currentPage - 1
+        this.currentPage = this.currentPage - 1;
       }
     }
   }
-}
+};
 </script>
 <style scoped>
 .pdf {

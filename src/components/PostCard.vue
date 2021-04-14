@@ -1,5 +1,8 @@
 <template>
-  <div class="post-card content-box" :class="{'post-card--has-poster' : post.poster}">
+  <div
+    class="post-card content-box"
+    :class="{ 'post-card--has-poster': post.poster }"
+  >
     <div class="post-card__header">
       <g-image
         alt="Cover image"
@@ -21,16 +24,16 @@
 </template>
 
 <script>
-import PostMeta from '~/components/PostMeta'
-import PostTags from '~/components/PostTags'
+import PostMeta from "~/components/PostMeta";
+import PostTags from "~/components/PostTags";
 
 export default {
   components: {
     PostMeta,
     PostTags
   },
-  props: ['post'],
-}
+  props: ["post"]
+};
 </script>
 
 <style lang="scss">

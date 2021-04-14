@@ -1,36 +1,41 @@
 export default type => {
   switch (type) {
-    case 'artesanal':
+    case "artesanato":
       return {
-        icon: 'mdi-hand-heart',
-        color: '#D81159'
-      }
-    case 'comida':
+        icon: "mdi-hand-heart",
+        color: "brown"
+      };
+    case "alimento":
       return {
-        icon: 'mdi-food',
-        color: '#D81159'
-      }
-    case 'cama':
+        icon: "mdi-food-variant",
+        color: "#D81159"
+      };
+    case "hospedagem":
       return {
-        icon: 'mdi-sleep',
-        color: '#FFBC42'
-      }
-    case 'rio':
+        icon: "mdi-sleep",
+        color: "#FFBC42"
+      };
+    case "terapêuticos":
       return {
-        icon: 'mdi-waves',
-        color: '#218380'
-      }
-    case 'bar':
+        icon: "mdi-cross",
+        color: "blue"
+      };
+    case "atração":
       return {
-        icon: 'mdi-beer',
-        color: '#8F2D56'
-      }
-    case 'wifi':
+        icon: "mdi-waves",
+        color: "#218380"
+      };
+    case "bar":
       return {
-        icon: 'mdi-wifi',
-        color: '#8F2D56'
-      }
+        icon: "mdi-beer",
+        color: "#8F2D56"
+      };
+    case "wifi":
+      return {
+        icon: "mdi-wifi",
+        color: "#8F2D56"
+      };
     default:
-      break
+      break;
   }
-}
+};

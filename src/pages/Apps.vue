@@ -33,13 +33,11 @@ query {
 // @ is an alias to /src
 import AppList from "@/components/AppList.vue";
 
-
 export default {
   name: "map",
   components: {
-    AppList,
-  },
+    AppList
+  }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

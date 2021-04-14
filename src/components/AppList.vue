@@ -1,6 +1,8 @@
 <template>
   <div justify="start">
-    <h3 class="text-center pb-8">Aplicativos locais, que funcionam mesmo sem Internet.</h3>
+    <h3 class="text-center pb-8">
+      Aplicativos locais, que funcionam mesmo sem Internet.
+    </h3>
     <br />
     <v-row>
       <v-col v-for="app in apps" :key="app.node.id" cols="12" sm="3" md="4">
@@ -11,16 +13,16 @@
 </template>
 
 <script>
-import AppCard from '@/components/AppCard'
+import AppCard from "@/components/AppCard";
 export default {
-    name: "AppList",
-    props: {
-        apps: {type: Array, default: []}
-    },
-    components: {
-        AppCard
-    }
-}
+  name: "AppList",
+  props: {
+    apps: { type: Array, default: [] }
+  },
+  components: {
+    AppCard
+  }
+};
 </script>
 <style scoped>
 h3 {

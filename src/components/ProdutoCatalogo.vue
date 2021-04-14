@@ -1,8 +1,12 @@
 <template>
   <v-card class="mx-auto" max-width="400">
-    <v-img class="white--text align-end" height="200px" :src="produto.imagem"></v-img>
+    <v-img
+      class="white--text align-end"
+      height="200px"
+      :src="produto.imagem"
+    ></v-img>
 
-    <v-card-subtitle class="pb-0">{{produto.nome}}</v-card-subtitle>
+    <v-card-subtitle class="pb-0">{{ produto.nome }}</v-card-subtitle>
 
     <v-card-text class="text--primary">
       <div v-html="produto.content" />
@@ -15,13 +19,8 @@
 </template>
 <script>
 export default {
-    props: {
-      produto: Object
-    }
-
-
-
-
-
+  props: {
+    produto: Object
   }
-  </script>
+};
+</script>

@@ -1,12 +1,36 @@
 <template>
   <Layout>
+    <!-- <div v-show="$page && $page.mercado">
+      {{$page}}
+    </div> -->
     <Welcome :toggle="toggleWelcome" :open="welcome" />
-    <CommunityMap class="map" v-show="$page.lugares" :places="$page.lugares.edges" />
+    <!-- <CommunityMap class="map" v-show="$page.lugares" :places="$page.lugares.edges" /> -->
+    <CommunityMap
+      class="map"
+      v-show="$page.mercado"
+      :places="$page.mercado.edges"
+    />
   </Layout>
 </template>
 
 <page-query>
 query {
+  mercado: allMercadoLocal {
+    edges {
+      node {
+        id
+        name
+        category
+        products
+        contact
+        order
+        coords {
+          lat
+          lon
+        }
+      }
+    }
+  }
   lugares: allLugar(filter: { publicado: { eq: true }}) {
     edges {
       node {

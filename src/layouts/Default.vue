@@ -7,14 +7,13 @@
   </v-app>
 </template>
 <script>
-import BarraLateral from '~/components/BarraLateral.vue'
+import BarraLateral from "~/components/BarraLateral.vue";
 
 export default {
   components: {
-    BarraLateral,
+    BarraLateral
   }
-}
+};
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

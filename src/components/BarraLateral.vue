@@ -1,41 +1,57 @@
 <template>
   <v-container>
-    <v-app-bar app color="indigo" dark>
-      <v-app-bar-nav-icon v-show="mobile" @click.stop="toggleBarraLateral" />
-      <v-app-bar-nav-icon
-        class="ml-2"
-        v-if="isBack"
-        @click="$router.push('/catalogo')"
+    <v-card>
+      <v-app-bar app color="indigo" dark>
+        <v-app-bar-nav-icon v-show="mobile" @click.stop="toggleBarraLateral" />
+        <v-app-bar-nav-icon
+          class="ml-2"
+          v-if="isBack"
+          @click="$router.push('/catalogo')"
+        >
+          <v-icon>mdi-keyboard-backspace</v-icon>
+        </v-app-bar-nav-icon>
+        <v-toolbar-title v-else>{{
+          this.$static.metadata.siteName
+        }}</v-toolbar-title>
+      </v-app-bar>
+      <v-navigation-drawer
+        :temporary="mobile"
+        v-model="drawer"
+        app
+        :permanent="!mobile"
       >
-        <v-icon>mdi-keyboard-backspace</v-icon>
-      </v-app-bar-nav-icon>
-      <v-toolbar-title v-else>{{
-        this.$static.metadata.siteName
-      }}</v-toolbar-title>
-    </v-app-bar>
-    <v-navigation-drawer
-      :temporary="mobile"
-      v-model="drawer"
-      app
-      :permanent="!mobile"
-    >
-      <v-list v-for="route in routes" :key="route.title" dense>
-        <v-list-item link @click="changeRoute(route.route)">
-          <v-list-item-action>
-            <v-icon>{{ route.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ route.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+        <!-- <v-img
+          height="250"
+          src="https://melhorespousadas.tur.br/uploads/pousadas-fotos/011/hostel-moinho-120131.jpg"
+        ></v-img> -->
+        <div class="pt-12">
+          <v-list v-for="route in routes" :key="route.title" dense>
+            <v-list-item link @click="changeRoute(route.route)">
+              <v-list-item-action>
+                <v-icon>{{ route.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{ route.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </div>
+      </v-navigation-drawer>
+    </v-card>
   </v-container>
 </template>
 <static-query>
 query {
   metadata {
-    intranet
+    intranet {
+      isIntranet
+      music
+      movies
+      courses
+      network
+      internet
+      apps
+    }
     siteName
   }
 }
@@ -49,6 +65,15 @@ export default {
   }),
   computed: {
     routes: function() {
+      const {
+        isIntranet,
+        apps,
+        music,
+        movies,
+        courses,
+        internet,
+        network
+      } = this.$static.metadata.intranet;
       let routes = [
         {
           title: "Mapa",
@@ -56,7 +81,6 @@ export default {
           route: "/"
         },
         {
-          
           title: "Mercado Local",
           icon: "mdi-shopping",
           route: "/catalogo"
@@ -67,39 +91,68 @@ export default {
           route: "/jornal"
         },
         {
-          
           title: "Sobre",
           icon: "mdi-information",
           route: "/sobre"
-        },
-        
+        }
       ];
-      if (this.$static.metadata.intranet == 'true') {
-        routes.splice(2 ,0, {
-          title: "Aplicativos locais",
-          icon: "mdi-apps",
-          route: "/apps"
-        });
-        routes.splice(3 ,0, {
-          title: "Internet",
-          icon: "mdi-web",
-          route: "http://rede.com/portal"
-        });
+      if (isIntranet) {
+        apps &&
+          routes.splice(4, 0, {
+            title: "Aplicativos locais",
+            icon: "mdi-apps",
+            route: apps
+          });
+        music &&
+          routes.splice(5, 0, {
+            title: "MoinhoTube",
+            icon: "mdi-music",
+            route: music
+          });
+        movies &&
+          routes.splice(6, 0, {
+            title: "MoinhoFlix",
+            icon: "mdi-movie",
+            route: movies
+          });
+        courses &&
+          routes.splice(7, 0, {
+            title: "Cursos",
+            icon: "mdi-school",
+            route: courses
+          });
+        network &&
+          routes.splice(8, 0, {
+            title: "Rede Social",
+            icon: "mdi-human-greeting",
+            route: network
+          });
+        internet &&
+          routes.splice(9, 0, {
+            title: "Internet",
+            icon: "mdi-web",
+            route: internet
+          });
+        // routes.splice(7 ,0, {
+        //   title: "Internet",
+        //   icon: "mdi-web",
+        //   route: "http://rede.com/portal"
+        // });
       }
       return routes;
     },
-    mobile () {
-      return this.$vuetify.breakpoint.xs
-    },
+    mobile() {
+      return this.$vuetify.breakpoint.xs;
+    }
   },
-  mounted () {
+  mounted() {
     if (this.$route.params.id) {
-      this.isBack = true
+      this.isBack = true;
     }
   },
   methods: {
-    toggleBarraLateral () {
-      this.drawer = !this.drawer
+    toggleBarraLateral() {
+      this.drawer = !this.drawer;
     },
     changeRoute(route) {
       const isExternal = route.includes("http://");
