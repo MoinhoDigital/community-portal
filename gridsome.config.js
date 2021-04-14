@@ -5,6 +5,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
+  icon: './static/images/favicon.png',
   siteName: process.env.SITE_NAME,
   siteDescription: process.env.SITE_DESCRIPTION,
   tileServer: process.env.SITE_DESCRIPTION || `http://localhost:3000`,

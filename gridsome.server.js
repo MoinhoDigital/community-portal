@@ -1,7 +1,7 @@
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const fetch = require('node-fetch')
 const docsP1 =
-  'https://spreadsheets.google.com/feeds/cells/1UZHuELHbtkZvNEa_yCaiCFJzPKD9G0tYuJ9TqHVVOGE/1/public/full?alt=json'
+  'https://spreadsheets.google.com/feeds/cells/14p4G__oKG0o60MXGyOPtQpzelciJR75YuRdQG2pFXME/1/public/full?alt=json'
 const docsP2 =
   'https://spreadsheets.google.com/feeds/cells/1UZHuELHbtkZvNEa_yCaiCFJzPKD9G0tYuJ9TqHVVOGE/2/public/full?alt=json'
 
@@ -36,7 +36,12 @@ function parseData (data) {
       name: value[3].toLowerCase().replace(/\b\w/g, c => c.toUpperCase()),
       category: value[1].toLowerCase(),
       products: value[2].split(',').map(i => i.toLowerCase()),
-      contact: value[4]
+      contact: value[4],
+      order: value[5],
+      coords: {
+        lat: value[6],
+        lon: value[7]
+      }
     }
   })
 }
@@ -45,13 +50,23 @@ module.exports = function (api) {
   api.loadSource(async actions => {
     const { addCollection, addMetadata } = actions
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
-    addMetadata('tileServer', process.env.TILE_SERVER)
+    addMetadata('mapboxAccessToken', process.env.MAPBOX_ACESS_TOKEN || false)
+    addMetadata('tileServer', process.env.TILE_SERVER || 'mapbox://styles/mapbox/satellite-streets-v11')
     addMetadata('intranet', process.env.INTRANET || false)
-    addMetadata('minZoom', parseInt(process.env.MAP_MIN_ZOOM) || 15)
-    addMetadata('maxZoom', parseInt(process.env.MAP_MAX_ZOOM) || 19)
+    addMetadata('minZoom', parseFloat(process.env.MAP_MIN_ZOOM) || 15)
+    addMetadata('maxZoom', parseFloat(process.env.MAP_MAX_ZOOM) || 18)
     addMetadata('maxCoords', stringToCoords(process.env.MAP_MAX_LONG_LAT))
     addMetadata('minCoords', stringToCoords(process.env.MAP_MIN_LONG_LAT))
     addMetadata('mapCenter', stringToCoords(process.env.MAP_CENTER))
+    addMetadata('intranet', {
+      isIntranet: process.env.INTRANET === 'true' ? true : false,
+      music: process.env.INTRA_MUSIC || false,
+      movies: process.env.INTRA_MOVIES || false,
+      courses: process.env.INTRA_COURSES || false,
+      network: process.env.INTRA_NETWORK || false,
+      internet: process.env.INTRA_INTERNET || false,
+      apps: process.env.INTRA_APP || false
+    })
     // Google Spreadsheet
     try {
       const response = await fetch(docsP1)
