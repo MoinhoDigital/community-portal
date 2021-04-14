@@ -26,7 +26,11 @@
         ></v-img> -->
         <div class="pt-12">
           <v-list v-for="route in routes" :key="route.title" dense>
-            <v-list-item link @click="changeRoute(route.route)">
+            <v-list-item
+              :disabled="route.disabled"
+              link
+              @click="changeRoute(route.route)"
+            >
               <v-list-item-action>
                 <v-icon>{{ route.icon }}</v-icon>
               </v-list-item-action>
@@ -96,49 +100,53 @@ export default {
           route: "/sobre"
         }
       ];
-      if (isIntranet) {
-        apps &&
-          routes.splice(4, 0, {
-            title: "Aplicativos locais",
-            icon: "mdi-apps",
-            route: apps
-          });
-        music &&
-          routes.splice(5, 0, {
-            title: "MoinhoTube",
-            icon: "mdi-music",
-            route: music
-          });
-        movies &&
-          routes.splice(6, 0, {
-            title: "MoinhoFlix",
-            icon: "mdi-movie",
-            route: movies
-          });
-        courses &&
-          routes.splice(7, 0, {
-            title: "Cursos",
-            icon: "mdi-school",
-            route: courses
-          });
-        network &&
-          routes.splice(8, 0, {
-            title: "Rede Social",
-            icon: "mdi-human-greeting",
-            route: network
-          });
-        internet &&
-          routes.splice(9, 0, {
-            title: "Internet",
-            icon: "mdi-web",
-            route: internet
-          });
-        // routes.splice(7 ,0, {
-        //   title: "Internet",
-        //   icon: "mdi-web",
-        //   route: "http://rede.com/portal"
-        // });
-      }
+      apps &&
+        routes.splice(4, 0, {
+          title: "Aplicativos locais",
+          icon: "mdi-apps",
+          route: apps,
+          disabled: !isIntranet
+        });
+      music &&
+        routes.splice(5, 0, {
+          title: "MoinhoTube",
+          icon: "mdi-music",
+          route: music,
+          disabled: !isIntranet
+        });
+      movies &&
+        routes.splice(6, 0, {
+          title: "MoinhoFlix",
+          icon: "mdi-movie",
+          route: movies,
+          disabled: !isIntranet
+        });
+      courses &&
+        routes.splice(7, 0, {
+          title: "Cursos",
+          icon: "mdi-school",
+          route: courses,
+          disabled: !isIntranet
+        });
+      network &&
+        routes.splice(8, 0, {
+          title: "Rede Social",
+          icon: "mdi-human-greeting",
+          route: network,
+          disabled: !isIntranet
+        });
+      internet &&
+        routes.splice(9, 0, {
+          title: "Internet",
+          icon: "mdi-web",
+          route: internet,
+          disabled: !isIntranet
+        });
+      // routes.splice(7 ,0, {
+      //   title: "Internet",
+      //   icon: "mdi-web",
+      //   route: "http://rede.com/portal"
+      // });
       return routes;
     },
     mobile() {
