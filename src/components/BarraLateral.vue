@@ -88,14 +88,20 @@ export default {
           route: "/"
         },
         {
+          title: "Jornal",
+          icon: "mdi-book",
+          route: "/jornal"
+        },
+        {
           title: "Mercado Local",
           icon: "mdi-shopping",
           route: "/catalogo"
         },
         {
-          title: "Jornal",
-          icon: "mdi-book",
-          route: "/jornal"
+          title: "Rede Social",
+          icon: "mdi-human-greeting",
+          route: network,
+          disabled: !network
         },
         {
           title: "Sobre",
@@ -131,13 +137,6 @@ export default {
           route: courses,
           disabled: !isIntranet
         });
-      network &&
-        routes.splice(8, 0, {
-          title: "Rede Social",
-          icon: "mdi-human-greeting",
-          route: network,
-          disabled: !isIntranet
-        });
       internet &&
         routes.splice(9, 0, {
           title: "Internet",
@@ -166,7 +165,7 @@ export default {
       this.drawer = !this.drawer;
     },
     changeRoute(route) {
-      const isExternal = route.includes("http://");
+      const isExternal = route.includes("http");
       if (this.mobile) this.toggleBarraLateral();
       if (isExternal) window.open(route);
       else this.$router.push(route);
