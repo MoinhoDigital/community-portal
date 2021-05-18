@@ -58,6 +58,7 @@ module.exports = function (api) {
     addMetadata('maxCoords', stringToCoords(process.env.MAP_MAX_LONG_LAT))
     addMetadata('minCoords', stringToCoords(process.env.MAP_MIN_LONG_LAT))
     addMetadata('mapCenter', stringToCoords(process.env.MAP_CENTER))
+    addMetadata('cobuySheet', `${process.env.COBUY_SHEET}`)
     addMetadata('intranet', {
       isIntranet: process.env.INTRANET === 'true' ? true : false,
       music: process.env.INTRA_MUSIC || false,

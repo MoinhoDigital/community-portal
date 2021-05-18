@@ -13,7 +13,8 @@ module.exports = {
     // Place: '/:nome',
     Post: '/:title',
     Tag: '/tag/:id',
-    Produto: '/produto/:id'
+    Produto: '/produto/:id',
+    Compra: '/compra/:id'
   },
 
   plugins: [
@@ -28,6 +29,13 @@ module.exports = {
             create: true
           }
         }
+      }
+    },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Compra',
+        path: 'conteudo/compra/*.md',
       }
     },
     {

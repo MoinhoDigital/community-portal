@@ -180,8 +180,20 @@ export default {
     }
   },
   mounted() {
+    console.log("MOUNTED HERE");
     window.mapboxgl = require("mapbox-gl");
+    var nav = new window.mapboxgl.NavigationControl();
+    // navigator.geolocation.getCurrentPosition(function(location) {
+    //   console.log(location.coords.latitude);
+    //   console.log(location.coords.longitude);
+    //   console.log(location.coords.accuracy);
+    // });
     this.map = new window.mapboxgl.Map(this.mapStyle);
+    console.log("GONNA TRY");
+
+    map.addControl(nav, "top-right");
+
+    console.log("MOUNTED");
   },
   methods: {
     handleEnter({ map, marker }) {

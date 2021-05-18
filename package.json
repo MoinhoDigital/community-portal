@@ -16,12 +16,15 @@
     "@gridsome/source-filesystem": "^0.6.2",
     "@gridsome/transformer-remark": "^0.6.0",
     "@mdi/font": "^5.3.45",
+    "currency.js": "^2.0.3",
+    "dayjs": "^1.10.4",
     "gridsome": "^0.7.15",
     "mapbox-gl": "^1.11.0",
     "node-fetch": "^2.6.1",
     "typeface-roboto": "^0.0.75",
     "vue-mapbox": "^0.4.1",
     "vue-pdf": "^4.2.0",
+    "vue2-timeago": "2.0.0",
     "vuetify": "^2.3.3"
   },
   "devDependencies": {

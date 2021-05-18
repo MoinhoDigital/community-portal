@@ -98,6 +98,11 @@ export default {
           route: "/catalogo"
         },
         {
+          title: "Compra Coletiva",
+          icon: "mdi-account-group",
+          route: "/compra"
+        },
+        {
           title: "Rede Social",
           icon: "mdi-human-greeting",
           route: network,
