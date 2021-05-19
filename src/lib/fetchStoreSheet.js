@@ -1,9 +1,17 @@
-import currency from 'currency.js'
+import currency from "currency.js";
 
 const localStorageKey = `@moinho/cobuy`;
 
+Date.prototype.addDays = function(days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+}
+
+
 const fetchGoogle = async (id) => {
   const googleUrl = `https://spreadsheets.google.com/feeds/cells/${id}/1/public/full?alt=json`;
+  const sheetUrl = `https://docs.google.com/spreadsheets/d/${id}`;
   const response = await fetch(googleUrl);
   const json = await response.json();
   function parseData(data) {
@@ -29,10 +37,12 @@ const fetchGoogle = async (id) => {
       }
     }, {});
     const splitDate = obj[6][2].split("-");
+    const splitPaymentDate = obj[7][2].split("/");
     const splitStart = splitDate[0].split("/");
     const splitEnd = splitDate[1].split("/");
     const currentYear = new Date().getFullYear();
     const currentDate = new Date();
+    const tomorrow = currentDate.addDays(1)
     const startDate = new Date(
       currentYear,
       parseInt(splitStart[1]) - 1,
@@ -43,37 +53,68 @@ const fetchGoogle = async (id) => {
       parseInt(splitEnd[1]) - 1,
       parseInt(splitEnd[0]) + 1
     );
-    const BRL = value => currency(value, { symbol: 'R$', decimal: ',', separator: '.' });
-    const pricePerLotWithoutFee = BRL(obj[7][2]);
-    const pricePerLot = pricePerLotWithoutFee.add((pricePerLotWithoutFee.divide(10)))
-
-    let participants = []
-    for (let index = 13; index < Object.keys(obj).length + 2; index++) {
-      const amount = obj[index][2].replace(/,/g, '')
+    const paymentEnd = new Date(
+      currentYear,
+      parseInt(splitPaymentDate[1]) - 1,
+      parseInt(splitPaymentDate[0])
+    );
+    const BRL = (value) =>
+      currency(value, { symbol: "R$", decimal: ",", separator: "." });
+    const pricePerLotWithoutFee = BRL(obj[8][2]);
+    const pricePerLot = pricePerLotWithoutFee.add(
+      pricePerLotWithoutFee.divide(10)
+    );
+    const open = currentDate <= endDate;
+    const openPayment = tomorrow > paymentEnd;
+    const tracking = obj[12][2]
+    const getStage = () => {
+      if (open) return 1;
+      else if (openPayment) return 2;
+      else if (!openPayment && tracking) return 3
+      else if (tracking) return 4
+      return 0;
+    };
+    let participants = [];
+    for (let index = 17; index < Object.keys(obj).length + 2; index++) {
+      const amount = obj[index][2].replace(/,/g, "");
       participants.push({
         name: obj[index][1],
         quantity: obj[index][2],
         shipping: obj[index][5],
-        payed: obj[index][6] === 'TRUE' ? true : false,
-        dueAmount: pricePerLot.multiply(amount)
-      })
+        payed: obj[index][6] === "TRUE" ? true : false,
+        dueAmount: pricePerLot.multiply(amount),
+      });
     }
-    participants.sort((a,b) =>  b.payed ? 1 : -1)
+    participants.sort((a, b) => (b.payed ? 1 : -1));
+    let organizers = []
+    for (let index = 2; index < Object.keys(obj[2]).length + 1; index++) {
+      if (obj[2][index]) {
+        const splitContact = obj[2][index].split(':')
+        organizers.push({
+          name: splitContact[0],
+          contact: splitContact[1].replace(/\s/g, '')
+        })
+      }
+    }
     return {
-      organizers: obj[2][2],
+      tracking,
+      distributionHub: obj[13][2],
+      sheetUrl: sheetUrl,
+      organizers,
       // orgnizerFee: obj[4][2],
       name: obj[4][2],
-      link: obj[9][2],
-      image: obj[10][2],
-      seller: obj[6][2],
+      link: obj[10][2],
+      image: obj[11][2],
+      seller: obj[5][2],
       startDate,
       endDate,
-      stage: 2,
-      open: currentDate <= endDate,
+      paymentEnd,
+      stage: getStage(),
+      open,
       pricePerLotWithoutFee,
       pricePerLot,
-      bankDetails: obj[8][2],
-      participants
+      bankDetails: obj[9][2],
+      participants,
     };
   }
   const finalData = parseData(json.feed.entry);
