@@ -65,12 +65,12 @@ const fetchGoogle = async (id) => {
       pricePerLotWithoutFee.divide(10)
     );
     const open = currentDate <= endDate;
-    const openPayment = tomorrow > paymentEnd;
+    const openPayment = tomorrow < paymentEnd;
     const tracking = obj[12][2]
     const getStage = () => {
       if (open) return 1;
       else if (openPayment) return 2;
-      else if (!openPayment && tracking) return 3
+      else if (!openPayment) return 3
       else if (tracking) return 4
       return 0;
     };

@@ -168,6 +168,7 @@
                 :href="product.tracking"
                 >Rastreamento <v-icon class="ml-4">mdi-truck</v-icon></a
               >
+              <p v-else>Fazendo pedido</p>
             </v-timeline-item>
             <v-timeline-item
               :color="
@@ -201,8 +202,8 @@
           }}</v-card-title
         >
         <v-divider />
-        <p class="ml-4 caption">
-          <v-icon color="red" small>mdi-exclamation-thick</v-icon> Atenção não
+        <p class="ml-4 caption" v-if="product.stage === 2">
+          <v-icon color="red" small>mdi-exclamation-thick</v-icon> Atenção, não
           pagamento até a data limite ({{ getDate(product.paymentEnd) }}) irá
           acarretar em abandono do pedido.
         </p>
