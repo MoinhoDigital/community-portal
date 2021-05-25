@@ -1,6 +1,10 @@
 <template>
   <Layout>
     <div>
+      <div>
+        <h1 class="title text-center">Mercado local</h1>
+        <v-img src="/images/uploads/mercado.jpg" max-height="45vh" contain />
+      </div>
       <v-expansion-panels v-if="this.$page && this.$page.mercado">
         <v-expansion-panel
           v-for="category in Object.keys(perCategory).reverse()"
