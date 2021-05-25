@@ -27,12 +27,20 @@
         <div :class="isMobile ? 'pt-0 pb-2' : 'pt-12'">
           <v-list v-for="route in routes" :key="route.title" dense>
             <v-list-item
+              :inactive="$route.fullPath === route.route"
               :disabled="route.disabled"
               link
               @click="changeRoute(route.route)"
             >
               <v-list-item-action>
-                <v-icon>{{ route.icon }}</v-icon>
+                <v-icon
+                  :color="
+                    $route.fullPath === route.route || route.disabled
+                      ? 'grey'
+                      : 'primary'
+                  "
+                  >{{ route.icon }}</v-icon
+                >
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{ route.title }}</v-list-item-title>
