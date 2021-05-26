@@ -163,10 +163,12 @@
               small
             >
               <h4>Aguardando entrega</h4>
-              <a
+              <v-btn
+                color="primary"
                 v-if="product.stage === 3 && product.tracking"
                 :href="product.tracking"
-                >Rastreamento <v-icon class="ml-4">mdi-truck</v-icon></a
+                target="_blank"
+                >Rastreamento <v-icon class="ml-4">mdi-truck</v-icon></v-btn
               >
               <p v-else>Fazendo pedido</p>
             </v-timeline-item>
