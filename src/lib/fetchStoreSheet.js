@@ -66,12 +66,21 @@ const fetchGoogle = async (id) => {
     );
     const open = currentDate <= endDate;
     const openPayment = tomorrow < paymentEnd;
-    const tracking = obj[12][2]
+    let tracking = []
+    let index = 2
+    while (index > 0) {
+      const trackingNumber = obj[12][index]
+      if (trackingNumber) {
+        index++
+        tracking.push(trackingNumber)
+      }
+      else index = 0
+    }
     const getStage = () => {
       if (open) return 1;
       else if (openPayment) return 2;
       else if (!openPayment) return 3
-      else if (tracking) return 4
+      else if (tracking.length > 0) return 4
       return 0;
     };
     let participants = [];
