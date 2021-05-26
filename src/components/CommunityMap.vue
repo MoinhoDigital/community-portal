@@ -28,14 +28,20 @@
             <v-card>
               <v-card-title>
                 {{ marker.name }}
-                <v-tooltip :v-show="marker.order" top>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-icon class="ml-2" v-bind="attrs" v-on="on" color="orange"
-                      >mdi-android-messages</v-icon
-                    >
-                  </template>
-                  <span>Sob encomenda</span>
-                </v-tooltip>
+                <div v-if="marker.order">
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon
+                        class="ml-2"
+                        v-bind="attrs"
+                        v-on="on"
+                        color="orange"
+                        >mdi-android-messages</v-icon
+                      >
+                    </template>
+                    <span>{{ marker }}</span>
+                  </v-tooltip>
+                </div>
               </v-card-title>
               <v-card-text>
                 <v-chip

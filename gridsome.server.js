@@ -1,9 +1,6 @@
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const fetch = require('node-fetch')
-const docsP1 =
-  'https://spreadsheets.google.com/feeds/cells/14p4G__oKG0o60MXGyOPtQpzelciJR75YuRdQG2pFXME/1/public/full?alt=json'
-const docsP2 =
-  'https://spreadsheets.google.com/feeds/cells/1UZHuELHbtkZvNEa_yCaiCFJzPKD9G0tYuJ9TqHVVOGE/2/public/full?alt=json'
+const marketSheet = `https://spreadsheets.google.com/feeds/cells/${process.env.MARKET_SHEET}/1/public/full?alt=json`
 
 function stringToCoords (string) {
   return string.split(',').map(i => parseFloat(i))
@@ -37,7 +34,7 @@ function parseData (data) {
       category: value[1].toLowerCase(),
       products: value[2].split(',').map(i => i.toLowerCase()),
       contact: value[4],
-      order: value[5],
+      order: value[5] === 'TRUE' ? true : false,
       coords: {
         lat: value[6],
         lon: value[7]
@@ -70,7 +67,7 @@ module.exports = function (api) {
     })
     // Google Spreadsheet
     try {
-      const response = await fetch(docsP1)
+      const response = await fetch(marketSheet)
       const data = await response.json()
       const entries = data.feed.entry
       const localMarket = parseData(entries)
