@@ -39,7 +39,7 @@
                         >mdi-android-messages</v-icon
                       >
                     </template>
-                    <span>{{ marker }}</span>
+                    <span>Sob encomenda</span>
                   </v-tooltip>
                 </div>
               </v-card-title>
