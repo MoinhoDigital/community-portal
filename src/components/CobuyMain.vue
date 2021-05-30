@@ -176,7 +176,7 @@
                 >
               </div>
 
-              <p v-else>Fazendo pedido</p>
+              <p v-else-if="product.stage === 3">Fazendo pedido</p>
             </v-timeline-item>
             <v-timeline-item
               :color="
@@ -192,9 +192,12 @@
                 <h4>Distribuindo</h4>
                 <h3 v-if="product.stage === 4 && product.distributionHub">
                   <v-icon color="green" class="ml-4">mdi-map-marker</v-icon>
-
                   {{ product.distributionHub }}
                 </h3>
+                <p>
+                  {{ Math.round(product.percentReceived) }}% das pessoas
+                  receberam
+                </p>
               </div>
             </v-timeline-item>
           </v-timeline>

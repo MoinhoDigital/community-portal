@@ -76,13 +76,7 @@ const fetchGoogle = async (id) => {
       }
       else index = 0
     }
-    const getStage = () => {
-      if (open) return 1;
-      else if (openPayment) return 2;
-      else if (!openPayment) return 3
-      else if (tracking.length > 0) return 4
-      return 0;
-    };
+
     let participants = [];
     for (let index = 17; index < Object.keys(obj).length + 2; index++) {
       const amount = obj[index][2].replace(/,/g, "");
@@ -92,9 +86,29 @@ const fetchGoogle = async (id) => {
         shipping: obj[index][5],
         payed: obj[index][6] === "TRUE" ? true : false,
         dueAmount: pricePerLot.multiply(amount),
+        received: obj[index][7] === "TRUE" ? true : false
       });
     }
-    participants.sort((a, b) => (b.payed ? 1 : -1));
+    participants
+    .sort((a, b) => {
+      if(a.name < b.name) { return -1; }
+      if(a.name > b.name) { return 1; }
+      return 0;
+    })
+    .sort((a, b) => (b.payed ? 1 : -1))
+    .sort((a, b) => (b.received ? 1 : -1))
+
+    const percentReceived = participants.reduce((prev, curr) => {
+      if (curr.received) return prev + 100 / participants.length
+      else return prev
+    }, 0)
+    const getStage = () => {
+      if (open) return 1;
+      else if (openPayment) return 2;
+      else if (!openPayment && tracking.length < 1) return 3
+      else if (tracking.length > 0 && percentReceived > 1 && percentReceived < 100) return 4
+      return 0;
+    };
     let organizers = []
     for (let index = 2; index < Object.keys(obj[2]).length + 1; index++) {
       if (obj[2][index]) {
@@ -108,6 +122,7 @@ const fetchGoogle = async (id) => {
     return {
       tracking,
       distributionHub: obj[13][2],
+      percentReceived,
       sheetUrl: sheetUrl,
       organizers,
       // orgnizerFee: obj[4][2],

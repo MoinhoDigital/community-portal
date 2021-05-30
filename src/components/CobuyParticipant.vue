@@ -7,7 +7,15 @@
     >
       <v-row>
         <v-col cols="2">
-          <v-icon :color="participant.payed ? 'green' : 'red'">
+          <v-icon
+            :color="
+              participant.received
+                ? 'green'
+                : participant.payed
+                ? 'orange'
+                : 'red'
+            "
+          >
             mdi-account
           </v-icon>
         </v-col>
