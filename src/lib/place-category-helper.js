@@ -36,6 +36,9 @@ export default type => {
         color: "#8F2D56"
       };
     default:
-      break;
+      return {
+        icon: "mdi-wifi",
+        color: "#8F2D56"
+      };
   }
 };
