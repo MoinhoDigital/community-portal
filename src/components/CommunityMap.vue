@@ -99,32 +99,51 @@ export default {
     MglMap: () => {
       if (process.isClient) {
         return import("vue-mapbox")
-          .then(m => m.MglMap)
+          .then((m) => m.MglMap)
           .catch();
       }
     },
     MglMarker: () => {
       if (process.isClient) {
         return import("vue-mapbox")
-          .then(m => m.MglMarker)
+          .then((m) => m.MglMarker)
           .catch();
       }
     },
     MglPopup: () => {
       if (process.isClient) {
         return import("vue-mapbox")
-          .then(m => m.MglPopup)
+          .then((m) => m.MglPopup)
           .catch();
       }
-    }
+    },
+    MglGeojsonLayer: () => {
+      if (process.isClient) {
+        return import("vue-mapbox")
+          .then((m) => m.MglGeojsonLayer)
+          .catch();
+      }
+    },
   },
   props: {
-    places: { type: Array, default: [] }
+    places: { type: Array, default: [] },
   },
   data() {
     return {
       map: null,
-      defaultCoord: [-47.46, -14.06]
+      defaultCoord: [-47.46, -14.06],
+      geoJsonSource: {
+        type: "geojson",
+        data: "/terra_kalunga.geojson",
+      },
+      geoJsonlayer: {
+        id: "terra_kalunga_layer",
+        type: "line",
+        paint: {
+          "line-color": this.$vuetify.theme.themes.light.primary || "red",
+          "line-width": 4,
+        },
+      },
     };
   },
   computed: {

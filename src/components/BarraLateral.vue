@@ -59,9 +59,9 @@ query {
       isIntranet
       music
       movies
-      courses
-      network
       internet
+      filter
+      doc
       apps
     }
     siteName
