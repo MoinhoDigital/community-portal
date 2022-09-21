@@ -26,7 +26,7 @@
     "vue-mapbox": "^0.4.1",
     "vue-pdf": "^4.2.0",
     "vue2-timeago": "2.0.0",
-    "vuetify": "^2.3.3"
+    "vuetify": "^2.6.10"
   },
   "devDependencies": {
     "@vue/babel-preset-app": "^4.4.6",
